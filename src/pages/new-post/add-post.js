@@ -33,7 +33,7 @@ const AddPost = (props) => {
   const savePost = () => {
     const post = createPost(postTitle, postLink, postImage, props.currentUser);
     props.addPost(post);
-    props.history.push('/posts');
+    props.history.push('/');
   };
 
   return (
@@ -49,7 +49,7 @@ const AddPost = (props) => {
         </FormGroup>
         <Row>
           <Button onClick={savePost}>Save</Button>
-          <Link to='/posts'><Button>Cancel</Button></Link>
+          <Link to='/'><Button>Cancel</Button></Link>
         </Row>
       </form>
     </div>
