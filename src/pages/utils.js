@@ -25,11 +25,11 @@ export const downvoteItem = (item) => {
   return item;
 };
 
-export const createComment = (comment) => ({
-    text: comment,
+export const createComment = (text, userName) => ({
+    text,
     timeStamp: new Date().getTime(),
     voteCount: 0,
-    userName: 'NOT IMLEMENTED YET!!!',
+    userName,
     comments: []
   }
 );

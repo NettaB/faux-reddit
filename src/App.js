@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import './App.css';
 import mainReducer from './reducers/reducer';
-import Main from './pages/main/main';
+import Main from './pages/main';
 
 const store = createStore(mainReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

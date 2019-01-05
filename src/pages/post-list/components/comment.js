@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {Glyphicon, Button} from "react-bootstrap";
-import {dateFormatter, commentCounter, upvoteItem, downvoteItem, createComment} from "../utils";
+import {dateFormatter, commentCounter, upvoteItem, downvoteItem, createComment} from "../../utils";
 import CommentModal from "./comment-modal";
 
 class Comment extends React.Component {
@@ -32,7 +33,7 @@ class Comment extends React.Component {
   onModalClose = (commentText) => {
     this.setState({showCommentModal: false});
     if (commentText) {
-      const comment = createComment(commentText);
+      const comment = createComment(commentText, this.props.currentUser);
       this.props.comment.comments.push(comment);
       this.props.updatePost();
     }
@@ -61,4 +62,8 @@ class Comment extends React.Component {
  }
 }
 
-export default Comment;
+const mapStateToProps = state => ({
+  currentUser: state.userName
+});
+
+export default connect(mapStateToProps)(Comment);

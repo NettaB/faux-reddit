@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {Button, Glyphicon, Panel} from 'react-bootstrap';
-import {dateFormatter, commentCounter, noopFunc, upvoteItem, downvoteItem, createComment} from '../utils';
+import {dateFormatter, commentCounter, noopFunc, upvoteItem, downvoteItem, createComment} from '../../utils';
 import CommentList from './comment-list';
 import CommentModal from './comment-modal';
 
@@ -43,7 +44,7 @@ class Post extends React.Component {
   onModalClose = (commentText) => {
     this.setState({showCommentModal: false});
     if (commentText) {
-      const comment = createComment(commentText);
+      const comment = createComment(commentText, this.props.currentUser);
       this.props.post.comments.push(comment);
       this.updatePost();
     }
@@ -60,7 +61,7 @@ class Post extends React.Component {
           <span className='vote-count'>{post.voteCount}</span>
           <Glyphicon glyph='arrow-down' className={downVoteClass} onClick={this.downVote}/>
           <div className='post-image'>
-            <img src={post.image}/>
+            <img src={post.image} alt='thumbnail'/>
           </div>
           <h4 className='post-title'><a href={post.link}>{post.title}</a></h4>
           <span className='post-date'>Submitted on {post.date} by {post.userName}</span>
@@ -82,4 +83,8 @@ class Post extends React.Component {
   }
 }
 
-export default Post
+const mapStateToProps = state => ({
+  currentUser: state.userName
+});
+
+export default connect(mapStateToProps)(Post)
